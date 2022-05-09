@@ -1,0 +1,40 @@
+{
+	"name": "ip-range-localaddress-agent",
+	"description": "Node.js HTTP Agent to use IP addresses from a range for outgoing requests.",
+	"version": "1.0.0",
+	"type": "module",
+	"main": "index.js",
+	"files": [
+		"index.js",
+		"example.js",
+		"lib"
+	],
+	"keywords": [
+		"ip",
+		"range",
+		"pool",
+		"random",
+		"agent",
+		"http"
+	],
+	"author": "Jannis R <mail@jannisr.de>",
+	"homepage": "https://github.com/derhuerst/ip-range-localaddress-agent",
+	"repository": "derhuerst/ip-range-localaddress-agent",
+	"bugs": "https://github.com/derhuerst/ip-range-localaddress-agent/issues",
+	"license": "ISC",
+	"engines": {
+		"node": ">=18"
+	},
+	"dependencies": {
+	},
+	"devDependencies": {
+		"eslint": "^8.0.0",
+		"tap-min": "^2.0.0",
+		"tape": "^5.0.1"
+	},
+	"scripts": {
+		"test": "env NODE_ENV=dev node test.js | tap-min",
+		"lint": "eslint .",
+		"prepublishOnly": "npm run lint && npm test"
+	}
+}

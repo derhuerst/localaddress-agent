@@ -26,6 +26,7 @@
 		"node": ">=18"
 	},
 	"dependencies": {
+		"agent-base": "^6.0.2",
 		"debug": "^4.3.4",
 		"ip-address": "^7.1.0",
 		"netlink": "^0.2.2",

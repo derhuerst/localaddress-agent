@@ -1,6 +1,6 @@
 # ip-range-localaddress-agent
 
-**[Node.js HTTP Agent](https://nodejs.org/api/http.html#class-httpagent) to use IP addresses from a range for outgoing requests.** Currently Linux only!
+**[Node.js HTTP Agent](https://nodejs.org/api/http.html#class-httpagent) to use IP addresses from a range for outgoing requests.** Currently only Linux is supported!
 
 [![npm version](https://img.shields.io/npm/v/ip-range-localaddress-agent.svg)](https://www.npmjs.com/package/ip-range-localaddress-agent)
 ![ISC-licensed](https://img.shields.io/github/license/derhuerst/ip-range-localaddress-agent.svg)
@@ -29,8 +29,51 @@ npm install ip-range-localaddress-agent
 ## Usage
 
 ```js
-todo
+import {createIpPoolAgent} from 'ip-range-localaddress-agent'
+import http from 'http'
+
+// endlessly cycle 30 IPv6 addresses
+const ipAddresses = (function* () {
+	let i = 0
+	while (true) {
+		yield `fe80::dead:beef:${i.toString(16)}/64`
+		i = ++i % 30
+	}
+})()
+
+const agent = createIpPoolAgent(ipAddresses, 'enp0s8')
+
+// send a lot of requests, with changing local addresses
+for (let i = 0; i < 100; i++) {
+	http.get('http://example.org/', {
+		agent,
+	}, cb)
+}
 ```
+
+
+## API
+
+### `createIpPoolAgent(ipAddresses, interface, opt = {})`
+
+`ipAddresses` must be an [iterable](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols) or [async iterable](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+
+`interface` must be the name of a network interface (e.g. `eth0`) or its index.
+
+Entries in `opt` override the following defaults:
+
+- `useExistingAddresses` – Use addresses defined in `ipAddresses` if they are assigned to the network interface *already*? Default: `true`
+- `addressAssignTimeout` – Timeout for assigning an IP address to the network interface. Default: 1s
+- `addressRemoveTimeout` – Timeout for removing an IP address from the network interface. Default: 1s
+- `addressMaxIdleTime` – Time that assigned IP addresses have to be idle (unused) in order to be removed automatically. Default: 10m
+- `removeAddressesEvery` – How often to check for "stale" idle IP addresses. Default: 10s
+
+
+### Related
+
+- [`netlink` npm package](https://github.com/mildsunrise/node_netlink) – netlink & rtnetlink client
+- [`k13-engineering/node-rtnetlink`](https://github.com/k13-engineering/node-rtnetlink) – alternative to `netlink`
+- [C code from the Avahi project adding an address via rtnetlink](https://stackoverflow.com/a/14657883)
 
 
 ## Contributing

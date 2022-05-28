@@ -45,7 +45,13 @@ const createIpPoolLocalAddressAgent = async (ipAddresses, iface, opt = {}) => {
 		return socket
 	}
 
-	return createAgent(createSocketWithLocalAddressFromIpPool)
+	const close = () => {
+		ipPool.destroy()
+	}
+
+	const agent = createAgent(createSocketWithLocalAddressFromIpPool)
+	agent.close = close
+	return agent
 }
 
 export {

@@ -1,3 +1,4 @@
+import createDebug from 'debug'
 import createAgent from 'agent-base'
 import {connect as netConnect} from 'net'
 import {connect as tlsConnect} from 'tls'
@@ -6,12 +7,14 @@ import {createIpPool} from './lib/ip-pool.js'
 const SECOND = 1000
 const MINUTE = 60 * SECOND
 
+const debugConnect = createDebug('ip-range-localaddress-agent:connect')
+
 // todo: is there a way to determine the default network interface?
 
 const createIpPoolLocalAddressAgent = async (ipAddresses, iface, opt = {}) => {
 	const poolCfg = {
 		useExistingAddresses: true,
-		addressAssignTimeout: SECOND,
+		addressAssignTimeout: 3 * SECOND,
 		addressRemoveTimeout: SECOND,
 		minAddresses: 10,
 		maxAddresses: 50,
@@ -26,12 +29,18 @@ const createIpPoolLocalAddressAgent = async (ipAddresses, iface, opt = {}) => {
 		options = {
 			...options,
 			localAddress,
+			// Version of IP stack. Must be 4, 6, or 0. The value 0 indicates that both IPv4 and IPv6 addresses are allowed.
+			family: 0,
 		}
+		debugConnect(options)
 
 		const socket = options.secureEndpoint
 			? tlsConnect(options)
 			: netConnect(options)
-		// todo: release address after request is done!
+
+		socket.once('close', () => {
+			ipPool.release(localAddress)
+		})
 
 		return socket
 	}

@@ -13,6 +13,8 @@ const createIpPoolLocalAddressAgent = async (ipAddresses, iface, opt = {}) => {
 		useExistingAddresses: true,
 		addressAssignTimeout: SECOND,
 		addressRemoveTimeout: SECOND,
+		minAddresses: 10,
+		maxAddresses: 50,
 		addressMaxIdleTime: 10 * MINUTE,
 		removeAddressesEvery: 10 * SECOND,
 		...opt,

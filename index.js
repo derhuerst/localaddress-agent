@@ -2,7 +2,7 @@ import createDebug from 'debug'
 import createAgent from 'agent-base'
 import {connect as netConnect} from 'net'
 import {connect as tlsConnect} from 'tls'
-import {createIpPool} from './lib/ip-pool.js'
+import {createIpPool, DRAINING} from './lib/ip-pool.js'
 
 const SECOND = 1000
 const MINUTE = 60 * SECOND
@@ -25,7 +25,11 @@ const createIpPoolLocalAddressAgent = async (ipAddresses, iface, opt = {}) => {
 	const ipPool = await createIpPool(ipAddresses, iface, poolCfg)
 
 	const createSocketWithLocalAddressFromIpPool = async (req, options) => {
-		const localAddress = await ipPool.acquire().promise
+		if (ipPool[DRAINING]) {
+			await ipPool[DRAINING]
+		}
+
+		const localAddress = await ipPool.acquire()
 		options = {
 			...options,
 			localAddress,

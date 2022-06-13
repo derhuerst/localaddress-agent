@@ -28,9 +28,9 @@
 	"dependencies": {
 		"agent-base": "^6.0.2",
 		"debug": "^4.3.4",
+		"generic-pool": "^3.8.2",
 		"ip-address": "^7.1.0",
-		"netlink": "^0.2.2",
-		"tarn": "^3.0.2"
+		"netlink": "^0.2.2"
 	},
 	"devDependencies": {
 		"eslint": "^8.0.0",

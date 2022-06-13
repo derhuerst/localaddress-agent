@@ -46,5 +46,5 @@ const ipAddresses = (function* () {
 	}
 
 	server.close()
-	agent.close()
+	agent.destroy()
 })()

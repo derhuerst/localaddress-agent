@@ -2,7 +2,7 @@ import createDebug from 'debug'
 import createAgent from 'agent-base'
 import {connect as netConnect} from 'net'
 import {connect as tlsConnect} from 'tls'
-import {createIpPool, DRAINING} from './lib/ip-pool.js'
+import {createIpPool, DESTROY} from './lib/ip-pool.js'
 
 const SECOND = 1000
 const MINUTE = 60 * SECOND
@@ -25,10 +25,6 @@ const createIpPoolLocalAddressAgent = async (ipAddresses, iface, opt = {}) => {
 	const ipPool = await createIpPool(ipAddresses, iface, poolCfg)
 
 	const createSocketWithLocalAddressFromIpPool = async (req, options) => {
-		if (ipPool[DRAINING]) {
-			await ipPool[DRAINING]
-		}
-
 		const localAddress = await ipPool.acquire()
 		options = {
 			...options,
@@ -43,18 +39,19 @@ const createIpPoolLocalAddressAgent = async (ipAddresses, iface, opt = {}) => {
 			: netConnect(options)
 
 		socket.once('close', () => {
-			ipPool.release(localAddress)
+			// todo: strategy if/when to destroy
+			ipPool.destroy(localAddress)
 		})
 
 		return socket
 	}
 
-	const close = () => {
-		ipPool.destroy()
+	const destroy = async () => {
+		await ipPool[DESTROY]()
 	}
 
 	const agent = createAgent(createSocketWithLocalAddressFromIpPool)
-	agent.close = close
+	agent.destroy = destroy
 	return agent
 }
 

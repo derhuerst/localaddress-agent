@@ -65,6 +65,8 @@ Entries in `opt` override the following defaults:
 - `useExistingAddresses` – Use addresses defined in `ipAddresses` if they are assigned to the network interface *already*? Default: `true`
 - `addressAssignTimeout` – Timeout for assigning an IP address to the network interface. Default: 1s
 - `addressRemoveTimeout` – Timeout for removing an IP address from the network interface. Default: 1s
+- `minAddresses` – Minimum number of addresses to keep assigned/idle (once this amount has been reached once). Default: 10
+- `maxAddresses` – Minimum number of addresses to keep assigned/idle. Default: 50
 - `addressMaxIdleTime` – Time that assigned IP addresses have to be idle (unused) in order to be removed automatically. Default: 10m
 - `removeAddressesEvery` – How often to check for "stale" idle IP addresses. Default: 10s
 

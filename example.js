@@ -20,7 +20,7 @@ const ipAddresses = (function* () {
 	const agent = await createIpPoolAgent(ipAddresses, 'enp0s8')
 
 	const fetchSelf = (port) => new Promise((resolve, reject) => {
-		const req = httpGet('http://localhost:' + port, {
+		const req = httpGet('http://[::1]:' + port, {
 			agent,
 		}, (res) => {
 			res.once('error', reject)

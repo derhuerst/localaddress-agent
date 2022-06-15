@@ -1,7 +1,7 @@
 {
-	"name": "ip-range-localaddress-agent",
+	"name": "localaddress-agent",
 	"description": "Node.js HTTP Agent to use IP addresses from a range for outgoing requests.",
-	"version": "1.0.1",
+	"version": "2.0.0",
 	"type": "module",
 	"main": "index.js",
 	"files": [
@@ -11,16 +11,16 @@
 	],
 	"keywords": [
 		"ip",
-		"range",
+		"localaddress",
+		"local address",
 		"pool",
-		"random",
 		"agent",
 		"http"
 	],
 	"author": "Jannis R <mail@jannisr.de>",
-	"homepage": "https://github.com/derhuerst/ip-range-localaddress-agent",
-	"repository": "derhuerst/ip-range-localaddress-agent",
-	"bugs": "https://github.com/derhuerst/ip-range-localaddress-agent/issues",
+	"homepage": "https://github.com/derhuerst/localaddress-agent",
+	"repository": "derhuerst/localaddress-agent",
+	"bugs": "https://github.com/derhuerst/localaddress-agent/issues",
 	"license": "ISC",
 	"engines": {
 		"node": ">=18"

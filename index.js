@@ -7,7 +7,7 @@ import {createIpPool, DESTROY} from './lib/ip-pool.js'
 const SECOND = 1000
 const MINUTE = 60 * SECOND
 
-const debugConnect = createDebug('ip-range-localaddress-agent:connect')
+const debugConnect = createDebug('localaddress-agent:connect')
 
 // todo: is there a way to determine the default network interface?
 

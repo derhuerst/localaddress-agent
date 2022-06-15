@@ -1,10 +1,10 @@
-# ip-range-localaddress-agent
+# localaddress-agent
 
 **[Node.js HTTP Agent](https://nodejs.org/api/http.html#class-httpagent) to use IP addresses from a range for outgoing requests.** Currently only Linux is supported!
 
-[![npm version](https://img.shields.io/npm/v/ip-range-localaddress-agent.svg)](https://www.npmjs.com/package/ip-range-localaddress-agent)
-![ISC-licensed](https://img.shields.io/github/license/derhuerst/ip-range-localaddress-agent.svg)
-![minimum Node.js version](https://img.shields.io/node/v/ip-range-localaddress-agent.svg)
+[![npm version](https://img.shields.io/npm/v/localaddress-agent.svg)](https://www.npmjs.com/package/localaddress-agent)
+![ISC-licensed](https://img.shields.io/github/license/derhuerst/localaddress-agent.svg)
+![minimum Node.js version](https://img.shields.io/node/v/localaddress-agent.svg)
 [![support me via GitHub Sponsors](https://img.shields.io/badge/support%20me-donate-fa7664.svg)](https://github.com/sponsors/derhuerst)
 [![chat with me on Twitter](https://img.shields.io/badge/chat%20with%20me-on%20Twitter-1da1f2.svg)](https://twitter.com/derhuerst)
 
@@ -22,14 +22,14 @@ To assign & remove addresses from the network interfaces efficiently, this packa
 ## Installation
 
 ```shell
-npm install ip-range-localaddress-agent
+npm install localaddress-agent
 ```
 
 
 ## Usage
 
 ```js
-import {createIpPoolAgent} from 'ip-range-localaddress-agent'
+import {createIpPoolAgent} from 'localaddress-agent'
 import http from 'http'
 
 // endlessly cycle 30 IPv6 addresses
@@ -80,4 +80,4 @@ Entries in `opt` override the following defaults:
 
 ## Contributing
 
-If you have a question or need support using `ip-range-localaddress-agent`, please double-check your code and setup first. If you think you have found a bug or want to propose a feature, use [the issues page](https://github.com/derhuerst/ip-range-localaddress-agent/issues).
+If you have a question or need support using `localaddress-agent`, please double-check your code and setup first. If you think you have found a bug or want to propose a feature, use [the issues page](https://github.com/derhuerst/localaddress-agent/issues).

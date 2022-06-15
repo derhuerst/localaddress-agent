@@ -7,17 +7,20 @@ const server = createServer((req, res) => {
 	res.end()
 })
 
-// endlessly cycle 39 IPv6 addresses
+// endlessly generate random IPv6 addresses
 const ipAddresses = (function* () {
-	let i = 0
 	while (true) {
-		yield `fe80::dead:beef:${i.toString(16)}/64`
-		i = ++i % 39
+		yield [
+			'fe80::dead:beef::',
+			Math.random().toString(16).slice(2, 6), ':',
+			Math.random().toString(16).slice(2, 6),
+			'/64',
+		].join('')
 	}
 })()
 
 ;(async () => {
-	const agent = await createIpPoolAgent(ipAddresses, 'enp0s8')
+	const agent = await createIpPoolAgent(ipAddresses, 'eth0')
 
 	const fetchSelf = (port) => new Promise((resolve, reject) => {
 		const req = httpGet('http://[::1]:' + port, {

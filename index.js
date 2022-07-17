@@ -25,12 +25,17 @@ const createIpPoolLocalAddressAgent = async (ipAddresses, iface, opt = {}) => {
 	const ipPool = await createIpPool(ipAddresses, iface, poolCfg)
 
 	const createSocketWithLocalAddressFromIpPool = async (req, options) => {
-		const localAddress = await ipPool.acquire()
+		const acquired = await ipPool.acquire()
+		const {address: localAddress, family} = acquired
+
 		options = {
 			...options,
 			localAddress,
-			// Version of IP stack. Must be 4, 6, or 0. The value 0 indicates that both IPv4 and IPv6 addresses are allowed.
-			family: 0,
+			// From the Node.js docs:
+			// > Version of IP stack. Must be 4, 6, or 0. The value 0 indicates that both IPv4 and IPv6 addresses are allowed.
+			// Unfortunately, using IPv6 addresses with `family: 0` doesn't seem to work (Node.js v16.16.0, Linux 5.4.0-121-generic),
+			// so we pass `4` or `6`.
+			family,
 		}
 		debugConnect(options)
 
@@ -40,7 +45,7 @@ const createIpPoolLocalAddressAgent = async (ipAddresses, iface, opt = {}) => {
 
 		socket.once('close', () => {
 			// todo: strategy if/when to destroy
-			ipPool.destroy(localAddress)
+			ipPool.destroy(acquired)
 		})
 
 		return socket

@@ -25,6 +25,13 @@ To assign & remove addresses from the network interfaces efficiently, this packa
 npm install localaddress-agent
 ```
 
+Because `localaddress-agent` uses [`netlink`](https://github.com/mildsunrise/node_netlink) underneath, on a typical Linux system, it needs these dependencies to be installed:
+
+- [`python3`](https://repology.org/project/python/information)
+- [`make`](https://repology.org/project/make/information)
+- [`g++`/GCC](https://repology.org/project/gcc/information)
+- [Linux headers](https://repology.org/project/linux/information)
+
 
 ## Usage
 

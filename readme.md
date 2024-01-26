@@ -13,7 +13,7 @@ Do you have a large number of IP addresses (e.g. a `/64` IPv6 range assigned to 
 This package on the other hand
 
 1. lets you specify a range (or an [iterator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols), if you want more control) of IP addresses,
-2. always keeps a configurable number of IP addresses assigned to the network interface,
+2. always keeps a configurable number of IP addresses assigned to the network interface (a *pool*),
 3. removes them once they have been used often enough (once by default).
 
 To assign & remove addresses from the network interfaces efficiently, this package uses the [rtnetlink API](https://www.man7.org/linux/man-pages/man7/rtnetlink.7.html) via the [awesome `netlink`](https://github.com/mildsunrise/node_netlink) npm package.

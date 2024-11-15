@@ -94,3 +94,5 @@ test('ip-pool works', async (t) => {
 	await pDelay(REMOVE_TIMEOUT + 300)
 	t.deepEqual(await getAddresses(), [], 'should be empty after pool destruction')
 })
+
+// todo: write test for random-from-env.js

@@ -32,8 +32,6 @@ if (process.env.RANDOM_LOCAL_ADDRESSES_RANGE) {
 	debug('not creating an HTTP Agent because $RANDOM_LOCAL_ADDRESSES_RANGE is missing/empty')
 }
 
-setTimeout(() => {}, 20_1000)
-
 export {
 	randomLocalAddressAgent,
 }

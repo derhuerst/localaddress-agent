@@ -18,6 +18,8 @@ This package on the other hand
 
 To assign & remove addresses from the network interfaces efficiently, this package uses the [rtnetlink API](https://www.man7.org/linux/man-pages/man7/rtnetlink.7.html) via the [awesome `netlink`](https://github.com/mildsunrise/node_netlink) npm package.
 
+`localaddress-agent` then packages this IP address pool into an [`http.Agent`](https://nodejs.org/docs/latest-v18.x/api/http.html#class-httpagent)/[`https.Agent`](https://nodejs.org/docs/latest-v18.x/api/https.html#class-httpsagent) (technically an [`agent-base@7`](https://github.com/TooTallNate/proxy-agents/tree/agent-base%407.1.1/packages/agent-base) `Agent`) that, with each new HTTP request sent with it, assigns a new IP address as [`localAddress`](https://nodejs.org/docs/latest-v18.x/api/net.html#socketconnectoptions-connectlistener).
+
 
 ## Installation
 

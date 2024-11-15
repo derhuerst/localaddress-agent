@@ -1,13 +1,14 @@
 import createDebug from 'debug'
-import {createRandomAddressesGenerator} from './lib/random-addresses-from-range.js'
-import {createIpPoolAgent} from './index.js'
-import {withSoftExit} from './lib/soft-exit.js'
 
 const debug = createDebug('localaddress-agent:random-from-env')
 
 let randomLocalAddressAgent = null
 
 if (process.env.RANDOM_LOCAL_ADDRESSES_RANGE) {
+	const {createRandomAddressesGenerator} = await import('./lib/random-addresses-from-range.js')
+	const {createIpPoolAgent} = await import('./index.js')
+	const {withSoftExit} = await import('./lib/soft-exit.js')
+
 	const range = process.env.RANDOM_LOCAL_ADDRESSES_RANGE
 	const iface = process.env.RANDOM_LOCAL_ADDRESSES_INTERFACE || 'eth0'
 	const deleteOnExit = process.env.RANDOM_LOCAL_ADDRESSES_DELETE_ON_EXIT !== 'false'

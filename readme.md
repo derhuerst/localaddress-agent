@@ -45,7 +45,7 @@ import http from 'http'
 const ipAddresses = (function* () {
 	let i = 0
 	while (true) {
-		yield `fe80::dead:beef:${i.toString(16)}/64`
+		yield `fe80::acab:${i.toString(16)}/64`
 		i = ++i % 30
 	}
 })()

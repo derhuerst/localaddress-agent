@@ -1,7 +1,7 @@
 {
 	"name": "localaddress-agent",
 	"description": "Node.js HTTP Agent to use IP addresses from a range for outgoing requests.",
-	"version": "2.1.0",
+	"version": "2.1.1",
 	"type": "module",
 	"main": "index.js",
 	"files": [

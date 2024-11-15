@@ -1,5 +1,5 @@
 import createDebug from 'debug'
-import createAgent from 'agent-base'
+import {Agent} from 'agent-base'
 import {connect as netConnect} from 'net'
 import {connect as tlsConnect} from 'tls'
 import {createIpPool, DESTROY} from './lib/ip-pool.js'
@@ -55,7 +55,7 @@ const createIpPoolLocalAddressAgent = async (ipAddresses, iface, opt = {}) => {
 		await ipPool[DESTROY]()
 	}
 
-	const agent = createAgent(createSocketWithLocalAddressFromIpPool)
+	const agent = new Agent(createSocketWithLocalAddressFromIpPool)
 	agent.destroy = destroy
 	return agent
 }

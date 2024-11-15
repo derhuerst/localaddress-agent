@@ -26,7 +26,7 @@
 		"node": ">=18"
 	},
 	"dependencies": {
-		"agent-base": "^6.0.2",
+		"agent-base": "^7.1.0",
 		"debug": "^4.3.4",
 		"generic-pool": "^3.8.2",
 		"ip-address": "^9.0.5",
